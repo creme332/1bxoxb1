@@ -1,5 +1,42 @@
-.box{
-    height: 100px;
-    width: 100px;
-    background-color: black;
+body{
+margin:0;
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:1em;
+}
+.message-container{
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 600px;
+    width: 800px;
+    outline: 1px solid;
+}
+
+.row{
+    flex-shrink: 0;
+    height: 50px;
+    width: 100%;
+    outline: 1px solid;
+}
+
+#input-container{
+    font-size: 20px;
+    width: 100%;
+}
+
+#input-container:focus{
+    outline-color: tomato;
 }
