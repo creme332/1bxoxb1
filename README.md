@@ -1,22 +1,23 @@
-# web-project-template
-[![Front‑End_Checklist followed](https://img.shields.io/badge/Front‑End_Checklist-followed-brightgreen.svg)](https://github.com/thedaviddias/Front-End-Checklist/)
+# 1bxoxb1
+![](assets/img/1bxoxb1.png)
 
-
-A concise description of the project.
-
-![GIF](gifs/gif1.gif)
+1bxoxb1 is a no-login real-time online chat app using Google Sheets as backend.
 
 [▶ Live Preview]()
 
 # 🚀Features
+- Chat anonymously without login.
 
+
+# How it works
+
+
+# Usage
 
 # 📌 Attributions
 Resource | Source
 ---|---
-resource| owner
-
-# 🕓 History
+[avatar in project image](assets/img/1bxoxb1.png) | [janet mac](https://janet-mac.com/google-avatar-project)
 
 # 🔨 To-Do
 - [ ] Make website responsive.
