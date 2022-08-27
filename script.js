@@ -1,37 +1,51 @@
-const messageContainer = document.querySelector(".message-container");
+const messageContainer = document.querySelector("#message-container");
 const userInputBox = document.querySelector("#input-container");
+const sendButton =  document.querySelector("#sendbtn");
 
-function addRow(text, senderIsMe) {
+function addRow(text, sentText) {
     let row = document.createElement("div");
     row.className = "row";
-    if(text==""){
-        row.textContent = Math.random().toString(36).slice(2, 7);
+    
+    let messageBubble = document.createElement("textarea");
+    messageBubble.className = "message-bubble";
+    messageBubble.readOnly = true;
+    messageBubble.cols = 40;
+
+    if(sentText){
+        messageBubble.classList.add("sent-text");
+        messageBubble.textContent = text;
+        // messageBubble.style.textAlign = "right";
+        //add margin right
     }else{
-        row.textContent = text;
+        messageBubble.classList.add("received-text");
+        messageBubble.textContent = Math.random().toString(36).slice(2, 7);
+        // messageBubble.style.textAlign = "left";
+        //add margin left to bubble
     }
-    if(senderIsMe){
-        row.style.textAlign = "right";
-    }
+    row.appendChild(messageBubble);
     messageContainer.appendChild(row);
     messageContainer.lastChild.scrollIntoView();
 }
 
+function addUsername(){
+
+}
 //generate a random text when ArrowUp is pressed
 document.addEventListener("keydown", (e) => {
     // console.log(e.key);
     if (e.key == "ArrowUp") {
         addRow("",false);
     }
+    if (e.key == "ArrowDown") {
+        addRow("",true);
+    }
 });
 
-userInputBox.addEventListener("keydown", (e)=>{
-    if (e.key == "Enter") {
-        e.preventDefault();
+sendButton.addEventListener("click", (e)=>{
         let input = userInputBox.value;
         console.log(input);
-        addRow(input,true);
+        if(input!="")addRow(input,true);
         userInputBox.value = "";
-    }
 } )
 
 

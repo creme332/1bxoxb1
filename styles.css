@@ -14,29 +14,71 @@ flex-direction: column;
     flex-direction: column;
     gap:1em;
 }
-.message-container{
+
+#message-container{
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap:1em;
+    gap:.7em;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 600px;
+    height: 400px;
     width: 800px;
     outline: 1px solid;
 }
 
+
 .row{
+    display: flex;
     flex-shrink: 0;
-    height: 50px;
+    height: auto;
     width: 100%;
     outline: 1px solid;
 }
+.message-bubble{
+    /* resize: none; */
+    height: auto;
+    border-radius: 20px;
+    padding: 10px;
+    /* outline:4px solid green; */
+}
+.received-text{
+    background-color: rgb(209, 207, 207);
+}
+.sent-text{
+    margin-left: auto;
+    /* margin-left:5px; */
+    background-color: rgb(255, 204, 230);
+}
+.username-bubble{
+    font-size: 20px;
+}
+.bottom-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    outline: 1px solid red;
+}
 
 #input-container{
-    font-size: 20px;
-    width: 100%;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+            font-size: 20px;
+    width: 90%;
+    resize: none;
 }
 
 #input-container:focus{
     outline-color: tomato;
+}
+
+button{
+    margin: 0;
+    padding:0;
+}
+#sendbtn{
+    height: 30px;
+    width: 50px;
+    height: 100%;
 }
