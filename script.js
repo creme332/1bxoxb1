@@ -26,15 +26,9 @@ function addMessage(text, sentText, timePosted) {
         bubble.classList.add("received-text");
     }
 
-    // let msgDiv = document.createElement("textarea");
-    // msgDiv.className = "msg-div";
-    // msgDiv.readOnly = true;
-    // msgDiv.cols = 40;
-
     let msgDiv = document.createElement("div");
     msgDiv.className = "msg-div";
 
-    console.log(text);
     //TESTING : for random text
     if (text == "") {
         msgDiv.textContent = Math.random().toString(36).slice(2, 10);
@@ -143,7 +137,7 @@ function saveToSpreadsheet() {
     userInputBox.value = "";
 }
 
-//For testing purposes, 
+//TESTING 
 document.addEventListener("keydown", (e) => {
     if (e.key == "ArrowUp") {
         addMessage("", false, "12:00");
@@ -159,7 +153,8 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-sendButton.addEventListener("click", saveToSpreadsheet)
+sendButton.addEventListener("click", saveToSpreadsheet);
+// updateMessages();
 
 //refresh messages every 2 seconds
 // setInterval(updateMessages, refreshRate);
