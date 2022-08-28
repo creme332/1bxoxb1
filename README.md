@@ -7,15 +7,17 @@ This project is a proof of concept for using Google Sheets as a server.
 
 ![GIF showing messaging app](assets/img/website.gif)
 
-[▶ Live Preview]()
+[▶ Live Preview](https://script.google.com/macros/s/AKfycbz3_jQSeelwylADfsLTh0hqxqqkGsoYyRG19UilpUde2dDJCjv79H3tOjrJMzp_DxrpbA/exec)
 
+> ⚠ If you encounter the error "Sorry, unable to open the file at this time."
+ when clicking on the above link, try opening it in an incognito tab.
 # 🚀Features
 - Free.
-- No login.
+- No login required.
 - Each user is assigned a random name.
 - Does not collect personal data or cookies.
 - Responsive UI for all screen sizes.
-- Chat features : emoji, paragraphing, ...
+- Chat supports emojis and paragraphing.
 
 
 # 🦴How it works
@@ -26,11 +28,13 @@ This project is a proof of concept for using Google Sheets as a server.
 - A spreadsheet on my Google Sheet account stores all required information (date, username, message).
 ![image of spreadsheet](assets/img/spreadsheet.png)
 
-- Every 2 seconds browser sends read request is sent to this sheet.
+- Every 2 seconds browser sends calls backend function `getSpreadsheetData()`.
 
-- Server returns the spreadsheet data as an array to browser.
+- `getSpreadsheetData()`, written in AppScript, sends a request to read spreadsheet using Sheets API.
 
-- New messages since last request are added to HTML.
+- `getSpreadsheetData()` forwards data to the browser after parsing it.
+
+- New messages since last call are added to HTML.
 
 
 # ✋Limitations
@@ -56,9 +60,9 @@ This project is a proof of concept for using Google Sheets as a server.
 
 ## Deploy project
 
-- Click `Deploy` > `New Deployment`.
+- Deploy your project as a web app.
+- The web app requires you to authorize access to your data.
 - Configure the settings as you want then deploy.
-
 
 # 📌 Attributions
 Resource | Source
