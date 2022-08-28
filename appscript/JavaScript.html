@@ -1,0 +1,47 @@
+<script>
+  const sendButton = document.querySelector("#sendbtn");
+  const input = document.querySelector("#input");
+  const things = document.querySelector("#things");
+
+  const messageContainer = document.querySelector(".message-container");
+  const userInputBox = document.querySelector("#input-container");
+  let currentRow = 0;
+
+  sendButton.addEventListener("click", saveToSpreadsheet);
+
+
+  function updateMessages() {
+    function onSuccess(allMessages) {
+      console.log(allMessages);
+      if (currentRow == 0) {
+        //initialise message container
+        for (let i = 0; i < allMessages.length; i++) {
+          let newMessage = document.createElement("li");
+          newMessage.textContent = allMessages[i];
+          things.appendChild(newMessage);
+        }
+      } else {
+        //add only messages which are after currentRow
+        for (let i = currentRow + 1; i <= allMessages.length; i++) {
+          let newMessage = document.createElement("li");
+          newMessage.textContent = allMessages[i - 1];
+          things.appendChild(newMessage);
+        }
+      }
+      currentRow = allMessages.length;
+    }
+    google.script.run.withSuccessHandler(onSuccess)
+      .getMessage();
+  }
+
+  function saveToSpreadsheet() {
+    //save user message to spreadsheet
+    if (userInputBox.value != "") {
+      google.script.run.userClicked(userInputBox.value);
+      //reset userInputBox box
+      userInputBox.value = "";
+    }
+  }
+  //check for new messages every 2s
+  setInterval(updateMessages, 2000);
+</script>
