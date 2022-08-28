@@ -14,8 +14,10 @@ function include(filename) {
     .getContent();
 }
 
-function addNewRow(username, user_input) {
-  worksheet.appendRow([new Date(), username, user_input]);
+function addNewRowToSheet(username, user_input) {
+  worksheet.appendRow([new Date().toString(), username, user_input]);
+  //date must be in string format so that it can be passed to client
+  //https://developers.google.com/apps-script/guides/html/reference/run#myFunction(...)
 }
 
 function getSpreadsheetData() {
@@ -30,5 +32,3 @@ function getSpreadsheetData() {
     return el[0] != "";
   });
 }
-// addNewRow("jonathan","paris")
-// Logger.log(getMessage());
