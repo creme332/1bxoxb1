@@ -11,32 +11,46 @@ let currentRowIndex = -1; // n-th row in spreadsheet has index (n-1)
 let lastUser = ""; //name of last person who posted a message
 let lastPostDate = ""; //date of last message
 
-function addMessage(text, sentText) {
+function addMessage(text, sentText, timePosted) {
     let row = document.createElement("div");
     row.className = "row";
 
-    let messageBubble = document.createElement("textarea");
-    messageBubble.className = "message-bubble";
-    messageBubble.readOnly = true;
-    messageBubble.cols = 40;
+    //add a bubble to row
+    let bubble = document.createElement("div");
+    bubble.className = "bubble";
 
-    //for random text
-    if (text == "") {
-        messageBubble.textContent = Math.random().toString(36).slice(2, 10);
-    } else {
-        messageBubble.textContent = text;
-    }
-
+    //position bubble inside row
     if (sentText) {
-        messageBubble.classList.add("sent-text");
-        // messageBubble.style.textAlign = "right";
-        //add margin right
+        bubble.classList.add("sent-text");
     } else {
-        messageBubble.classList.add("received-text");
-        // messageBubble.style.textAlign = "left";
-        //add margin left to bubble
+        bubble.classList.add("received-text");
     }
-    row.appendChild(messageBubble);
+
+    // let msgDiv = document.createElement("textarea");
+    // msgDiv.className = "msg-div";
+    // msgDiv.readOnly = true;
+    // msgDiv.cols = 40;
+
+    let msgDiv = document.createElement("div");
+    msgDiv.className = "msg-div";
+
+    console.log(text);
+    //TESTING : for random text
+    if (text == "") {
+        msgDiv.textContent = Math.random().toString(36).slice(2, 10);
+    } else {
+        msgDiv.textContent = text;
+    }
+
+    bubble.appendChild(msgDiv);
+
+    //add time info in bubble
+    let timeDiv = document.createElement("div");
+    timeDiv.className = "time-container";
+    timeDiv.textContent = timePosted;
+    bubble.appendChild(timeDiv);
+
+    row.appendChild(bubble);
     messageContainer.appendChild(row);
     messageContainer.lastChild.scrollIntoView();
 }
@@ -61,44 +75,54 @@ function addDateBox(date) {
 }
 
 function updateMessages() {
-    function onSuccess(spreadsheetData) {
-        //spreadsheetData is a 2d array.
-        // first column contains date
-        // second column contains username
-        // third colummn contains message
 
-        const lastRowIndex = spreadsheetData.length - 1;
+    function onSuccess(spreadsheetDataArray) {
+        //spreadsheetDataArray is a 2d array.
 
-        function formatDate(date){
-            //initial date format : Sat Aug 27 20:41:13 GMT+04:00 2022
+        function formatDate(date) {
+            //initial date format : Sun Aug 28 2022 12:11:26 GMT+0400 (Mauritius Standard Time)
             //return 27 Aug 2022
             date = date.split(' ');
-            let year = date[date.length-1];
             let day = date[2];
             let month = date[1];
+            let year = date[3];
             return `${day} ${month} ${year}`;
         }
 
-        for (let i = currentRowIndex + 1; i <= lastRowIndex; i++) {
-            let msg = spreadsheetData[i][0];
-            let date = spreadsheetData[i][1];
-            let user = spreadsheetData[i][2];
+        function getTime(date) {
+            //initial date format : Sun Aug 28 2022 12:11:26 GMT+0400 (Mauritius Standard Time)
+            //return 12:11
 
-            if(formatDate(lastPostDate)!=formatDate(date)){
+            //get hours:minutes:seconds  => 12:11:26
+            time = date.split(' ')[4];
+
+            //get hours:minutes  => 12:11
+            time = time.split(':').splice(0, 2).join(':');
+            return time;
+        }
+
+        //loop through new rows since last update
+        const lastRowIndex = spreadsheetDataArray.length - 1;
+        for (let i = currentRowIndex + 1; i <= lastRowIndex; i++) {
+            let date = spreadsheetDataArray[i][0];
+            let user = spreadsheetDataArray[i][1];
+            let msg = spreadsheetDataArray[i][2];
+            let timePosted = getTime(date);
+
+            if (formatDate(lastPostDate) != formatDate(date)) {
                 addDateBox(formatDate(date));
             }
 
-            if(lastUser!= user && user != MY_USERNAME){
+            if (lastUser != user && user != MY_USERNAME) {
                 addUsernameBox(user);
             }
 
-            if(user==MY_USERNAME) addMessage(msg, true);
-            else addMessage(msg, false);
+            if (user == MY_USERNAME) addMessage(msg, true, timePosted);
+            else addMessage(msg, false, timePosted);
 
             lastUser = user;
             lastPostDate = date;
         }
-
         currentRowIndex = lastRowIndex;
     }
     google.script.run.withSuccessHandler(onSuccess)
@@ -110,10 +134,10 @@ function saveToSpreadsheet() {
     if (userInputBox.value == "") return;
 
     //TESTING : display message 
-    addMessage(userInputBox.value, true);
+    addMessage(userInputBox.value, true, "12:00");
 
     //send username and message to spreadsheet
-    //google.script.run.addNewRow(username, userInputBox.value);
+    // google.script.run.addNewRowToSheet(MY_USERNAME, userInputBox.value);
 
     //reset userInputBox
     userInputBox.value = "";
@@ -122,10 +146,10 @@ function saveToSpreadsheet() {
 //For testing purposes, 
 document.addEventListener("keydown", (e) => {
     if (e.key == "ArrowUp") {
-        addMessage("", false);
+        addMessage("", false, "12:00");
     }
     if (e.key == "ArrowDown") {
-        addMessage("", true);
+        addMessage("", true, "12:00");
     }
     if (e.key == "ArrowRight") {
         addUsernameBox("username");
@@ -139,3 +163,4 @@ sendButton.addEventListener("click", saveToSpreadsheet)
 
 //refresh messages every 2 seconds
 // setInterval(updateMessages, refreshRate);
+
