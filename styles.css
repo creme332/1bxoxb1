@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+
+* {
+    font-family: 'Lexend Deca', sans-serif;
+}
+
 body {
     margin: 0;
     height: 100vh;
@@ -23,7 +29,8 @@ body {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 400px;
-    width: 800px;
+    width: 80vw;
+    max-width: 800px;
     outline: 1px solid;
 }
 
@@ -37,7 +44,6 @@ body {
 }
 
 .bubble {
-
     /* resize: none; */
     height: auto;
     border-radius: 20px;
@@ -46,13 +52,13 @@ body {
 }
 
 .received-text {
-    background-color: rgb(209, 207, 207);
+    background-color: rgb(234, 234, 234);
 }
 
 .sent-text {
     margin-left: auto;
     /* margin-left:5px; */
-    background-color: rgb(255, 204, 230);
+    background-color: rgb(255, 225, 240);
 }
 
 .msg-div {
@@ -72,7 +78,7 @@ body {
 
 .username-bubble {
     /* outline:1px solid; */
-    color: brown;
+    color: rgb(237, 75, 237);
     width: 100%;
     font-size: 15px;
 }
@@ -82,7 +88,7 @@ body {
     padding: 10px;
     font-size: 16px;
     margin: auto;
-    background-color: rgb(194, 255, 194);
+    background-color: rgb(200, 253, 200);
 }
 
 .bottom-container {
@@ -115,13 +121,23 @@ button {
 #sendbtn {
     font-size: 30px;
     /* outline: 1px solid; */
-    height: 25px;
+    height: 50px;
     font-weight: 100;
     width: 50px;
-    height: 100%;
+    outline: 1px solid;
     border-radius: 50%;
 }
 
 #sendbtn:hover {
-    background-color: blanchedalmond;
+    outline-color: tomato;
+}
+
+@media screen and (max-width:520px) {
+    #sendbtn {
+        font-size: 25px;
+        height: 100%;
+        width: 100%;
+        max-width: 50px;
+        max-height: 50px;
+    }
 }
