@@ -1,25 +1,25 @@
-body{
-margin:0;
-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-}
-
-.container{
+body {
+    margin: 0;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap:1em;
 }
 
-#message-container{
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#message-container {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap:.7em;
+    gap: .7em;
     overflow-y: scroll;
     overflow-x: hidden;
     height: 400px;
@@ -28,57 +28,81 @@ flex-direction: column;
 }
 
 
-.row{
+.row {
     display: flex;
     flex-shrink: 0;
     height: auto;
     width: 100%;
-    outline: 1px solid;
+    /* outline: 1px solid; */
 }
-.message-bubble{
+
+.message-bubble {
     /* resize: none; */
     height: auto;
     border-radius: 20px;
     padding: 10px;
     /* outline:4px solid green; */
 }
-.received-text{
+
+.received-text {
     background-color: rgb(209, 207, 207);
 }
-.sent-text{
+
+.sent-text {
     margin-left: auto;
     /* margin-left:5px; */
     background-color: rgb(255, 204, 230);
 }
-.username-bubble{
-    font-size: 20px;
+
+.username-bubble {
+    /* outline:1px solid; */
+    color: brown;
+    width: 100%;
+    font-size: 15px;
 }
-.bottom-container{
+
+.date-bubble {
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    margin: auto;
+    background-color: rgb(194, 255, 194);
+}
+
+.bottom-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
     height: 50px;
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
 }
 
-#input-container{
+#input-container {
     white-space: pre-wrap;
     overflow-wrap: break-word;
-            font-size: 20px;
+    font-size: 20px;
     width: 90%;
     resize: none;
 }
 
-#input-container:focus{
+#input-container:focus {
     outline-color: tomato;
 }
 
-button{
+/* reset css for button  */
+button {
     margin: 0;
-    padding:0;
+    padding: 0;
+    border: 0;
 }
-#sendbtn{
+
+#sendbtn {
     height: 30px;
     width: 50px;
     height: 100%;
+    border-radius: 50%;
+}
+
+#sendbtn:hover {
+    background-color: blanchedalmond;
 }

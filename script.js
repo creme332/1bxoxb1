@@ -1,24 +1,33 @@
 const messageContainer = document.querySelector("#message-container");
 const userInputBox = document.querySelector("#input-container");
-const sendButton =  document.querySelector("#sendbtn");
+const sendButton = document.querySelector("#sendbtn");
 
-function addRow(text, sentText) {
+// Generate a random username : https://stackoverflow.com/a/38622545/17627866
+const USERNAME = Math.random().toString(36).slice(2, 7);
+userInputBox.placeholder = `Enter message. Your username is ${USERNAME}.`;
+
+function addMessage(text, sentText) {
     let row = document.createElement("div");
     row.className = "row";
-    
+
     let messageBubble = document.createElement("textarea");
     messageBubble.className = "message-bubble";
     messageBubble.readOnly = true;
     messageBubble.cols = 40;
 
-    if(sentText){
-        messageBubble.classList.add("sent-text");
+    //for random text
+    if (text == "") {
+        messageBubble.textContent = Math.random().toString(36).slice(2, 10);
+    } else {
         messageBubble.textContent = text;
+    }
+
+    if (sentText) {
+        messageBubble.classList.add("sent-text");
         // messageBubble.style.textAlign = "right";
         //add margin right
-    }else{
+    } else {
         messageBubble.classList.add("received-text");
-        messageBubble.textContent = Math.random().toString(36).slice(2, 7);
         // messageBubble.style.textAlign = "left";
         //add margin left to bubble
     }
@@ -27,25 +36,46 @@ function addRow(text, sentText) {
     messageContainer.lastChild.scrollIntoView();
 }
 
-function addUsername(){
-
+function addUsernameBox(username) {
+    let row = document.createElement("div");
+    row.className = "row";
+    let usernameContainer = document.createElement("div");
+    usernameContainer.className = "username-bubble";
+    usernameContainer.textContent = username;
+    row.appendChild(usernameContainer);
+    messageContainer.appendChild(row);
 }
-//generate a random text when ArrowUp is pressed
+function addDateBox(date) {
+    let row = document.createElement("div");
+    row.className = "row";
+    let dateContainer = document.createElement("div");
+    dateContainer.className = "date-bubble";
+    dateContainer.textContent = date;
+    row.appendChild(dateContainer);
+    messageContainer.appendChild(row);
+}
+
+//For testing purposes, 
 document.addEventListener("keydown", (e) => {
-    // console.log(e.key);
     if (e.key == "ArrowUp") {
-        addRow("",false);
+        addMessage("", false);
     }
     if (e.key == "ArrowDown") {
-        addRow("",true);
+        addMessage("", true);
+    }
+    if (e.key == "ArrowRight") {
+        addUsernameBox("username");
+    }
+    if (e.key == "ArrowLeft") {
+        addDateBox("22 Aug 2022");
     }
 });
 
-sendButton.addEventListener("click", (e)=>{
-        let input = userInputBox.value;
-        console.log(input);
-        if(input!="")addRow(input,true);
-        userInputBox.value = "";
-} )
+sendButton.addEventListener("click", (e) => {
+    let input = userInputBox.value;
+    console.log(input);
+    if (input != "") addMessage(input, true);
+    userInputBox.value = "";
+})
 
 
