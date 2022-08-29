@@ -2,7 +2,7 @@
   const messageContainer = document.querySelector("#message-container");
   const userInputBox = document.querySelector("#input-container");
   const sendButton = document.querySelector("#sendbtn");
-  const refreshRate = 2000; //check for new messages every 2 seconds
+  const REFRESH_RATE = 2000; //check for new messages every 2 seconds
 
   // Generate a random username : https://stackoverflow.com/a/38622545/17627866
   const MY_USERNAME = Math.random().toString(36).slice(2, 7);
@@ -133,6 +133,6 @@
   updateMessages();
 
   //refresh messages every 2 seconds
-  setInterval(updateMessages, refreshRate);
+  setInterval(updateMessages, REFRESH_RATE);
 
 </script>
