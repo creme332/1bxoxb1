@@ -12,6 +12,16 @@ function doGet() {
   return htmlOutput;
 }
 
+// To enable iframe use : 
+// function doGet() {
+//   let template = HtmlService.createTemplateFromFile('Index');
+//   let html = template.evaluate()
+//   .setTitle('1bxoxb1')
+//   .setSandboxMode(HtmlService.SandboxMode.IFRAME)
+//   .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+//   return html;
+// }
+
 function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename)
     .getContent();
