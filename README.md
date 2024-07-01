@@ -1,7 +1,7 @@
 # 💬 1bxoxb1
 1bxoxb1 is a no-login real-time online chat app using Google Sheets as backend.
 
-This project is a proof of concept for using Google Sheets as a backend. Read my [blog post](https://creme332.github.io/creamy-notes/posts/chat-app-appscript/) for more information.
+This project is a proof of concept for using Google Sheets as a backend. Read my [blog post](https://creme332.github.io/posts/chat-app-appscript/) for more information.
 
 ![GIF showing messaging app](assets/img/website.gif)
 
